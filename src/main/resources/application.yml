@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: redis-demo
+  redis:
+    host: 106.120.201.126
+    port: 14728
+    password: Wanji300552
+    jedis:
+      pool:
+        max-active: 200
+        max-wait: 5000
+        max-idle: 20
+        min-idle: 10
+    timeout: 5000
+    database: 7
+
+server:
+  port: 53101
+
