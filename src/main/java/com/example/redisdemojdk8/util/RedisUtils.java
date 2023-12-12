@@ -2,6 +2,7 @@ package com.example.redisdemojdk8.util;
 
 import com.example.redisdemojdk8.constant.Constant;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.data.redis.support.atomic.RedisAtomicLong;
 import org.springframework.stereotype.Component;
 
@@ -297,5 +298,19 @@ public class RedisUtils {
      */
     public Set<String> keys() {
         return redisTemplate.keys("*");
+    }
+
+    /**
+     * 获取全局ID范围
+     *
+     * @param key 建
+     * @param increment ID范围
+     * @return
+     */
+    public Long getGlobalIdRange(String key, long increment) {
+        ValueOperations<String, Object> ops = redisTemplate.opsForValue();
+        Long newIdRangeStart = ops.increment(key, increment);
+        // The range of IDs that are now reserved are from newIdRangeStart - increment + 1 to newIdRangeStart.
+        return newIdRangeStart - increment + 1;
     }
 }

@@ -13,6 +13,7 @@ public class DemoServiceTest extends RedisDemoJdk8ApplicationTests {
     @Test
     public void demoMethod() {
         redisUtils.set("foo", "bar");
+        redisUtils.set("globalId", "1");
         redisUtils.setHash("key", "hkey", "hvalue");
     }
 
@@ -25,5 +26,11 @@ public class DemoServiceTest extends RedisDemoJdk8ApplicationTests {
     public void getVersion() {
         String mytype = redisUtils.getVersion("mytype2");
         System.out.println(mytype);
+    }
+
+    @Test
+    public void getGlobalIdRange() {
+        Long globalId = redisUtils.getGlobalIdRange("globalId", 1000);
+        System.out.println(globalId);
     }
 }
